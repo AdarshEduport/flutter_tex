@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'dart:ui_web' as ui;
+import 'dart:ui' as ui;
 
 late ValueNotifier<double> _widgetHeightNotifier ;
 
@@ -44,6 +44,7 @@ class TeXViewState extends State<TeXView> {
   }
 
   void _initWebview() {
+  
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         _viewId,
