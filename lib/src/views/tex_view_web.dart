@@ -44,6 +44,7 @@ class TeXViewState extends State<TeXView> {
   }
 
   void _initWebview() {
+    // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         _viewId,
         (int id) => html.IFrameElement()
