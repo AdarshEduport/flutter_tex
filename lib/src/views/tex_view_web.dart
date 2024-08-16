@@ -23,7 +23,7 @@ class TeXViewState extends State<TeXView> {
     _initTeXView();
     return ValueListenableBuilder(
       valueListenable: _widgetHeightNotifier,
-      builder:(context,ht,child) =>SizedBox(
+      builder:(context,double ht,child) =>SizedBox(
         height: ht,
         child: HtmlElementView(
           key: widget.key ?? ValueKey(_viewId),
