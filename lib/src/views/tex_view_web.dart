@@ -38,9 +38,9 @@ class TeXViewState extends State<TeXView> {
             ),
             Positioned.fill(
               child: PointerInterceptor(
-                  debug: true,
+    
                    
-                  child: MouseRegion
+                  child: const MouseRegion
                   (
                     opaque: true,
                     child: SizedBox(height: 300,width: 300,)),
