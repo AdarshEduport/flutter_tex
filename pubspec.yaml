@@ -13,7 +13,7 @@ environment:
 dependencies:
   webview_flutter_plus: 
   markdown: 
-  pointer_interceptor: ^0.10.1+2
+  
 
   flutter:
     sdk: flutter
