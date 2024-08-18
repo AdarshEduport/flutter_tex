@@ -34,6 +34,7 @@ class TeXViewInkWell implements TeXViewWidget {
 
   @override
   void onTapCallback(String id) {
+
     if (this.id == id) onTap!(id);
   }
 

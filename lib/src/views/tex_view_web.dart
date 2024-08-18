@@ -9,6 +9,8 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'dart:ui' as ui;
 
+import 'package:pointer_interceptor/pointer_interceptor.dart';
+
 late ValueNotifier<double> _widgetHeightNotifier ;
 
 class TeXViewState extends State<TeXView> {
@@ -25,12 +27,27 @@ class TeXViewState extends State<TeXView> {
       valueListenable: _widgetHeightNotifier,
       builder:(context,double ht,child) =>SizedBox(
         height: ht,
-        child: HtmlElementView(
-          key: widget.key ?? ValueKey(_viewId),
-          viewType: _viewId,
-          onPlatformViewCreated: (id) {
-            setState(() {});
-          },
+        child: Stack(
+          children: [
+            HtmlElementView(
+              key: widget.key ?? ValueKey(_viewId),
+              viewType: _viewId,
+              onPlatformViewCreated: (id) {
+                setState(() {});
+              },
+            ),
+            Positioned.fill(
+              child: PointerInterceptor(
+                  debug: true,
+                   
+                  child: MouseRegion
+                  (
+                    opaque: true,
+                    child: SizedBox(height: 300,width: 300,)),
+                ),
+            )
+
+          ],
         ),
       ),
     );
