@@ -9,9 +9,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'dart:ui' as ui;
 
-
-
-late ValueNotifier<double> _widgetHeightNotifier ;
+late ValueNotifier<double> _widgetHeightNotifier;
 
 class TeXViewState extends State<TeXView> {
   String? _lastData;
@@ -20,12 +18,10 @@ class TeXViewState extends State<TeXView> {
 
   @override
   Widget build(BuildContext context) {
-  
-
     _initTeXView();
     return ValueListenableBuilder(
       valueListenable: _widgetHeightNotifier,
-      builder:(context,double ht,child) =>SizedBox(
+      builder: (context, double ht, child) => SizedBox(
         height: ht,
         child: Stack(
           children: [
@@ -38,15 +34,15 @@ class TeXViewState extends State<TeXView> {
             ),
             Positioned.fill(
               child: PointerInterceptor(
-    
-                   
-                  child: const MouseRegion
-                  (
+                intercepting: false,
+                child: const MouseRegion(
                     opaque: true,
-                    child: SizedBox(height: 300,width: 300,)),
-                ),
+                    child: SizedBox(
+                      height: 300,
+                      width: 300,
+                    )),
+              ),
             )
-
           ],
         ),
       ),
@@ -61,7 +57,6 @@ class TeXViewState extends State<TeXView> {
   }
 
   void _initWebview() {
-  
     // ignore: undefined_prefixed_name
     ui.platformViewRegistry.registerViewFactory(
         _viewId,
@@ -75,7 +70,7 @@ class TeXViewState extends State<TeXView> {
 
     js.context['TeXViewRenderedCallback'] = (message) {
       double viewHeight = double.parse(message.toString());
-      if (viewHeight !=  _widgetHeightNotifier.value) {
+      if (viewHeight != _widgetHeightNotifier.value) {
         log('After rendering View height $viewHeight view id $_viewId');
 
         _widgetHeightNotifier.value = viewHeight;
@@ -98,11 +93,6 @@ class TeXViewState extends State<TeXView> {
     }
   }
 }
-
-
-
-
-
 
 const String _viewType = '__webPointerInterceptorViewType__';
 const String _debug = 'debug__';
