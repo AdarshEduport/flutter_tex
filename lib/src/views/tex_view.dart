@@ -7,6 +7,7 @@ import 'package:flutter_tex/src/views/tex_view_mobile.dart'
 class TeXView extends StatefulWidget {
   /// A list of TeXViewChild.
   final TeXViewWidget child;
+  final bool enableHtmlInterceptor;
 
   /// Style TeXView Widget with [TeXViewStyle].
   final TeXViewStyle? style;
@@ -34,7 +35,8 @@ class TeXView extends StatefulWidget {
     this.style,
     this.loadingWidgetBuilder,
     this.onRenderFinished,
-    this.renderingEngine,
+    this.renderingEngine,  this.enableHtmlInterceptor =true,
+
   });
 
   @override
