@@ -3,10 +3,10 @@
     padding: 0;
 }
 
-#TeXView {
+/* #TeXView {
     overflow: hidden;
     position: relative;
-}
+} */
 
 .tex-view-ink-well .ripple {
     border-radius: 50%;
