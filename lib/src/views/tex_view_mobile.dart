@@ -75,7 +75,7 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
 
   @override
   void dispose() {
-    _controller.server.close();
+    // _controller.server.close();
     super.dispose();
   }
 
