@@ -19,8 +19,8 @@ class TeXViewState extends State<TeXView> with AutomaticKeepAliveClientMixin {
     _controller = WebViewControllerPlus()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(Color(Colors.transparent.value))
-      ..loadFlutterAssetServer(
-          "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html")
+      // ..loadFlutterAssetServer(
+      //     "packages/flutter_tex/js/${widget.renderingEngine?.name ?? 'katex'}/index.html")
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageFinished: (String url) {
