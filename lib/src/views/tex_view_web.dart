@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_web_libraries_in_flutter
 
 import 'dart:developer';
-import 'dart:html' as html;
-import 'dart:js' as js;
+// import 'dart:html' as html;
+// import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
@@ -59,39 +59,39 @@ class TeXViewState extends State<TeXView> {
 
   void _initWebview() {
     // ignore: undefined_prefixed_name
-    ui.platformViewRegistry.registerViewFactory(
-        _viewId,
-        (int id) => html.IFrameElement()
-          ..src =
-              "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
-          ..id = _viewId
-          ..style.height = '100%'
-          ..style.width = '100%'
-          ..style.border = '0');
+    // ui.platformViewRegistry.registerViewFactory(
+    //     _viewId,
+    //     (int id) => html.IFrameElement()
+    //       ..src =
+    //           "assets/packages/flutter_tex/js/${widget.renderingEngine?.name ?? "katex"}/index.html"
+    //       ..id = _viewId
+    //       ..style.height = '100%'
+    //       ..style.width = '100%'
+    //       ..style.border = '0');
 
-    js.context['TeXViewRenderedCallback'] = (message) {
-      double viewHeight = double.parse(message.toString());
-      if (viewHeight != _widgetHeightNotifier.value) {
-        log('After rendering View height $viewHeight view id $_viewId');
+    // js.context['TeXViewRenderedCallback'] = (message) {
+    //   double viewHeight = double.parse(message.toString());
+    //   if (viewHeight != _widgetHeightNotifier.value) {
+    //     log('After rendering View height $viewHeight view id $_viewId');
 
-        _widgetHeightNotifier.value = viewHeight;
-      }
-    };
+    //     _widgetHeightNotifier.value = viewHeight;
+    //   }
+    // };
 
-    js.context['OnTapCallback'] = (id) {
-      widget.child.onTapCallback(id);
-    };
+    // js.context['OnTapCallback'] = (id) {
+    //   widget.child.onTapCallback(id);
+    // };
   }
 
   void _initTeXView() {
-    if (getRawData(widget) != _lastData) {
-      js.context.callMethod('initWebTeXView', [
-        _viewId,
-        getRawData(widget),
-        widget.renderingEngine?.name ?? "katex"
-      ]);
-      _lastData = getRawData(widget);
-    }
+    // if (getRawData(widget) != _lastData) {
+    //   js.context.callMethod('initWebTeXView', [
+    //     _viewId,
+    //     getRawData(widget),
+    //     widget.renderingEngine?.name ?? "katex"
+    //   ]);
+    //   _lastData = getRawData(widget);
+    // }
   }
 }
 
@@ -105,17 +105,17 @@ String _getViewType({bool debug = false}) {
 
 // Registers a viewFactory for this widget.
 void _registerFactory({bool debug = false}) {
-  final String viewType = _getViewType(debug: debug);
-  // ignore: undefined_prefixed_name
-  ui.platformViewRegistry.registerViewFactory(viewType, (int viewId) {
-    final html.Element htmlElement = html.DivElement()
-      ..style.width = '100%'
-      ..style.height = '100%';
-    if (debug) {
-      htmlElement.style.backgroundColor = 'rgba(255, 0, 0, .5)';
-    }
-    return htmlElement;
-  }, isVisible: false);
+  // final String viewType = _getViewType(debug: debug);
+  // // ignore: undefined_prefixed_name
+  // ui.platformViewRegistry.registerViewFactory(viewType, (int viewId) {
+  //   final html.Element htmlElement = html.DivElement()
+  //     ..style.width = '100%'
+  //     ..style.height = '100%';
+  //   if (debug) {
+  //     htmlElement.style.backgroundColor = 'rgba(255, 0, 0, .5)';
+  //   }
+  //   return htmlElement;
+  // }, isVisible: false);
 }
 
 /// The web implementation of the `PointerInterceptor` widget.
