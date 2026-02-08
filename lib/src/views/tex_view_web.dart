@@ -9,7 +9,7 @@ import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
 import 'dart:ui_web' as ui;
 
-late ValueNotifier<double> _widgetHeightNotifier;
+ValueNotifier<double> _widgetHeightNotifier = ValueNotifier(0);
 
 class TeXViewState extends State<TeXView> {
   String? _lastData;
@@ -69,13 +69,14 @@ class TeXViewState extends State<TeXView> {
           ..style.border = '0');
 
     js.context['TeXViewRenderedCallback'] = (message) {
-      double viewHeight = double.parse(message.toString());
+      double viewHeight = double.tryParse(message.toString()) ?? 0;
   
       if (viewHeight != _widgetHeightNotifier.value && viewHeight>0) {
         
-        log('After rendering View height  non zero $viewHeight view id $_viewId');
+       
            widget.onRenderFinished?.call(viewHeight);
         _widgetHeightNotifier.value = viewHeight;
+         log('After rendering View height  non zero $viewHeight view id $_viewId');
       }
     };
 
