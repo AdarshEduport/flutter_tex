@@ -21,31 +21,29 @@ class TeXViewState extends State<TeXView> {
     _initTeXView();
     return ValueListenableBuilder(
       valueListenable: _widgetHeightNotifier,
-      builder: (context, double ht, child) => SingleChildScrollView(
-        child: SizedBox(
-          height: ht,
-          child: Stack(
-            children: [
-              HtmlElementView(
-                key: widget.key ?? ValueKey(_viewId),
-                viewType: _viewId,
-                onPlatformViewCreated: (id) {
-                  setState(() {});
-                },
+      builder: (context, double ht, child) => SizedBox(
+        height: ht,
+        child: Stack(
+          children: [
+            HtmlElementView(
+              key: widget.key ?? ValueKey(_viewId),
+              viewType: _viewId,
+              onPlatformViewCreated: (id) {
+                setState(() {});
+              },
+            ),
+            Positioned.fill(
+              child: PointerInterceptor(
+                intercepting: widget.enableHtmlInterceptor,
+                child: const MouseRegion(
+                    opaque: true,
+                    child: SizedBox(
+                      height: 300,
+                      width: 300,
+                    )),
               ),
-              Positioned.fill(
-                child: PointerInterceptor(
-                  intercepting: widget.enableHtmlInterceptor,
-                  child: const MouseRegion(
-                      opaque: true,
-                      child: SizedBox(
-                        height: 300,
-                        width: 300,
-                      )),
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
