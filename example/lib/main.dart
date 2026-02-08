@@ -74,6 +74,9 @@ class _TexViewFullExampleState extends State<TexViewFullExample> {
     return   Scaffold(
       body: TeXView(
         enableHtmlInterceptor: false,
+        onRenderFinished: (height) {
+          log('height $height');
+        },
         renderingEngine: const TeXViewRenderingEngine.mathjax(),
         child: TeXViewColumn(children:
         List.generate(10, (index) {
