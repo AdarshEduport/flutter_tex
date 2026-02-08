@@ -7,52 +7,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 import 'package:flutter_tex/src/utils/core_utils.dart';
-import 'dart:ui' as ui;
-
-late ValueNotifier<double> _widgetHeightNotifier;
+import 'dart:ui_web' as ui;
 
 class TeXViewState extends State<TeXView> {
   String? _lastData;
-
   final String _viewId = UniqueKey().toString();
-
   @override
   Widget build(BuildContext context) {
     _initTeXView();
-    return ValueListenableBuilder(
-      valueListenable: _widgetHeightNotifier,
-      builder: (context, double ht, child) => SizedBox(
-        height: ht,
-        child: Stack(
-          children: [
-            HtmlElementView(
-              key: widget.key ?? ValueKey(_viewId),
-              viewType: _viewId,
-              onPlatformViewCreated: (id) {
-                setState(() {});
-              },
-            ),
-            Positioned.fill(
-              child: PointerInterceptor(
-       intercepting:widget.enableHtmlInterceptor ,
-
-                child: const MouseRegion(
-                    opaque: true,
-                    child: SizedBox(
-                      height: 300,
-                      width: 300,
-                    )),
-              ),
-            )
-          ],
+    return Stack(
+      children: [
+        HtmlElementView(
+          key: widget.key ?? ValueKey(_viewId),
+          viewType: _viewId,
+          onPlatformViewCreated: (id) {
+            setState(() {});
+          },
         ),
-      ),
+        Positioned.fill(
+          child: PointerInterceptor(
+            intercepting: widget.enableHtmlInterceptor,
+            child: const MouseRegion(
+                opaque: true,
+                child: SizedBox(
+                  height: 300,
+                  width: 300,
+                )),
+          ),
+        )
+      ],
     );
   }
 
   @override
   void initState() {
-    _widgetHeightNotifier = ValueNotifier(minHeight);
     _initWebview();
     super.initState();
   }
@@ -71,11 +59,8 @@ class TeXViewState extends State<TeXView> {
 
     js.context['TeXViewRenderedCallback'] = (message) {
       double viewHeight = double.parse(message.toString());
-      if (viewHeight != _widgetHeightNotifier.value) {
-        log('After rendering View height $viewHeight view id $_viewId');
-
-        _widgetHeightNotifier.value = viewHeight;
-      }
+      log("After rendering View height $viewHeight view id $_viewId");
+      widget.onRenderFinished?.call(viewHeight);
     };
 
     js.context['OnTapCallback'] = (id) {
