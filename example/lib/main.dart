@@ -3,11 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_tex/flutter_tex.dart';
 
-
-
-const String question1 =r'''<p>A longitudinal wave is traveling through a medium with a wave speed of <span class=\"math-tex\"><span class=\"math-tex\">\\(340 \\mathrm{~m} / \\mathrm{s}\\)</span></span>. If the frequency of the wave is 85 Hz , calculate the wavelength.</p>\r\n''';
-const String question2 =r'''<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">The mixture of <span class=\"math-tex\"><span class=\"math-tex\">\\(\\mathrm{H}_{2(g)}, \\mathrm{I}_{2(g)}\\)</span></span>&nbsp;and&nbsp;<span class=\"math-tex\"><span class=\"math-tex\">\\(\\mathrm{HI}_{(g)}\\)</span></span>&nbsp;is at equilibrium.</span></span></p>\r\n''';
-const question3 =r'''<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">The equilibrium constants for the following two reactions at 298 K are given below:<br />\r\n\\[<br />\r\n\\begin{aligned}<br />\r\n&amp; 2 A \\rightleftharpoons B+C ; K_1=16 \\\\<br />\r\n&amp; 2 B+C \\rightleftharpoons 2 X ; K_2=25<br />\r\n\\end{aligned}<br />\r\n\\]</span></span></p>\r\n\r\n<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">What is the value of <span class=\"math-tex\">\\(K\\)</span> for the reaction,<br />\r\n\\[<br />\r\nA+\\frac{1}{2} B \\rightleftharpoons X \\text { at } 298 \\mathrm{~K} ?<br />\r\n\\]</span></span><br />\r\n&nbsp;</p>\r\n''';
+const String question1 =
+    r'''<p>A longitudinal wave is traveling through a medium with a wave speed of <span class=\"math-tex\"><span class=\"math-tex\">\\(340 \\mathrm{~m} / \\mathrm{s}\\)</span></span>. If the frequency of the wave is 85 Hz , calculate the wavelength.</p>\r\n''';
+const String question2 =
+    r'''<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">The mixture of <span class=\"math-tex\"><span class=\"math-tex\">\\(\\mathrm{H}_{2(g)}, \\mathrm{I}_{2(g)}\\)</span></span>&nbsp;and&nbsp;<span class=\"math-tex\"><span class=\"math-tex\">\\(\\mathrm{HI}_{(g)}\\)</span></span>&nbsp;is at equilibrium.</span></span></p>\r\n''';
+const question3 =
+    r'''<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">The equilibrium constants for the following two reactions at 298 K are given below:<br />\r\n\\[<br />\r\n\\begin{aligned}<br />\r\n&amp; 2 A \\rightleftharpoons B+C ; K_1=16 \\\\<br />\r\n&amp; 2 B+C \\rightleftharpoons 2 X ; K_2=25<br />\r\n\\end{aligned}<br />\r\n\\]</span></span></p>\r\n\r\n<p><span style=\"font-size:16px;\"><span style=\"font-family:Poppins;\">What is the value of <span class=\"math-tex\">\\(K\\)</span> for the reaction,<br />\r\n\\[<br />\r\nA+\\frac{1}{2} B \\rightleftharpoons X \\text { at } 298 \\mathrm{~K} ?<br />\r\n\\]</span></span><br />\r\n&nbsp;</p>\r\n''';
 
 const sample = r'''<div class="container">
 <h2>
@@ -71,29 +72,24 @@ class TexViewFullExample extends StatefulWidget {
 class _TexViewFullExampleState extends State<TexViewFullExample> {
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
+    return Scaffold(
       body: TeXView(
         enableHtmlInterceptor: false,
         onRenderFinished: (height) {
           log('height $height');
         },
         renderingEngine: const TeXViewRenderingEngine.mathjax(),
-        child: TeXViewColumn(children:
-        List.generate(10, (index) {
-          if(index==2){
-            return
-             TeXViewInkWell(child: 
-              TeXViewDocument(
-              
-              '---------BTN----------'), id: '1',
+        child: TeXViewColumn(
+            children: List.generate(10, (index) {
+          if (index == 2) {
+            return TeXViewInkWell(
+              child: TeXViewDocument('---------BTN----------'),
+              id: '1',
               onTap: (id) {
-                setState(() {
-                  
-                });
+                setState(() {});
                 log('Ontap $id');
-              
               },
-              );
+            );
           }
           return const TeXViewDocument(sample);
         })),

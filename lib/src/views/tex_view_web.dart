@@ -70,10 +70,11 @@ class TeXViewState extends State<TeXView> {
 
     js.context['TeXViewRenderedCallback'] = (message) {
       double viewHeight = double.parse(message.toString());
-      widget.onRenderFinished?.call(viewHeight);
-      if (viewHeight != _widgetHeightNotifier.value) {
-        log('After rendering View height $viewHeight view id $_viewId');
-       
+  
+      if (viewHeight != _widgetHeightNotifier.value && viewHeight>0) {
+        
+        log('After rendering View height  non zero $viewHeight view id $_viewId');
+           widget.onRenderFinished?.call(viewHeight);
         _widgetHeightNotifier.value = viewHeight;
       }
     };
