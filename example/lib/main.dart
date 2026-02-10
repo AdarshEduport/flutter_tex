@@ -79,20 +79,45 @@ class _TexViewFullExampleState extends State<TexViewFullExample> {
           log('height $height');
         },
         renderingEngine: const TeXViewRenderingEngine.mathjax(),
-        child: TeXViewColumn(
-            children: List.generate(10, (index) {
-          if (index == 2) {
-            return TeXViewInkWell(
-              child: TeXViewDocument('---------BTN----------'),
-              id: '1',
-              onTap: (id) {
-                setState(() {});
-                log('Ontap $id');
-              },
-            );
-          }
-          return const TeXViewDocument(sample);
-        })),
+        child:  TeXViewColumn(children: [
+          TeXViewRow(
+              style: TeXViewStyle(
+                mainAxisAlignment: TeXViewMainAxisAlignment.center,
+              ),
+              children: [
+                TeXViewInkWell(
+                  onTap: (id) {
+                    
+                  },
+                    child: TeXViewDocument("TEST 1",
+                        style: TeXViewStyle(
+                            flex: 1,
+                            textAlign: TeXViewTextAlign.center,
+                            margin: TeXViewMargin.all(10),
+                            border: TeXViewBorder.all(TeXViewBorderDecoration(
+                                borderWidth: 2, borderColor: Colors.blue)))),
+                    id: "1"),
+                TeXViewDocument(r"4",
+                    style: TeXViewStyle(
+                        flex: 1,
+                        margin: TeXViewMargin.all(10),
+                        border: TeXViewBorder.all(TeXViewBorderDecoration(
+                            borderWidth: 2, borderColor: Colors.red)))),
+              ]),
+          // ...List.generate(10, (index) {
+          //   if (index == 2) {
+          //     return TeXViewInkWell(
+          //       child: const TeXViewDocument('---------BTN----------'),
+          //       id: '1',
+          //       onTap: (id) {
+          //         setState(() {});
+          //         log('Ontap $id');
+          //       },
+          //     );
+          //   }
+          //   return const TeXViewDocument(sample);
+          // })
+        ]),
       ),
     );
   }
